@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Private Healing Somatics</title>
+  <meta name="description" content="Private somatic sessions designed for deep release, nervous system regulation, sensual reconnection, and discreet high-touch care." />
+  <style>
+    :root{
+      --bg:#0b0b0d;
+      --bg2:#111114;
+      --panel:rgba(255,255,255,.05);
+      --panel-2:rgba(255,255,255,.07);
+      --line:rgba(255,255,255,.12);
+      --text:#f2ede4;
+      --muted:#c3b6a4;
+      --soft:#a79a8b;
+      --accent:#d4b892;
+      --accent-2:#9d7f58;
+      --shadow:0 20px 60px rgba(0,0,0,.45);
+      --radius:22px;
+      --max:1200px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: Georgia, "Times New Roman", serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(212,184,146,.12), transparent 28%),
+        radial-gradient(circle at 85% 10%, rgba(157,127,88,.15), transparent 20%),
+        linear-gradient(180deg, #09090a 0%, #0d0d10 25%, #111114 55%, #0c0c0e 100%);
+      line-height:1.45;
+      letter-spacing:.01em;
+    }
+
+    body::before{
+      content:"";
+      position:fixed; inset:0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px);
+      background-size:36px 36px;
+      pointer-events:none;
+      mask-image:linear-gradient(180deg, rgba(0,0,0,.55), transparent 90%);
+      -webkit-mask-image:linear-gradient(180deg, rgba(0,0,0,.55), transparent 90%);
+    }
+
+    a{color:inherit; text-decoration:none}
+    img{max-width:100%; display:block}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 22px}
+    .topbar{
+      position:sticky; top:0; z-index:100;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      background:rgba(10,10,12,.64);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .nav{
+      min-height:76px; display:flex; align-items:center; justify-content:space-between; gap:20px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:14px;
+    }
+    .brand-mark{
+      width:42px; height:42px; border-radius:50%;
+      border:1px solid rgba(255,255,255,.12);
+      background:
+        radial-gradient(circle at 30% 30%, rgba(212,184,146,.35), transparent 25%),
+        linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.03), 0 10px 30px rgba(0,0,0,.35);
+    }
+    .brand h1{
+      font-size:15px; letter-spacing:.18em; margin:0; text-transform:uppercase; font-weight:normal;
+    }
+    .brand p{
+      margin:2px 0 0; color:var(--soft); font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+    }
+
+    .nav-links{
+      display:flex; align-items:center; gap:16px; flex-wrap:wrap;
+      font-size:13px; color:#e3d6c5;
+    }
+    .nav-links a{
+      opacity:.9; padding:8px 0;
+    }
+    .nav-links a:hover{opacity:1; color:#fff}
+    .btn, button{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      padding:14px 20px; border-radius:999px; border:1px solid rgba(255,255,255,.12);
+      background:linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.05));
+      color:#fff; font-size:14px; letter-spacing:.06em; text-transform:uppercase;
+      box-shadow:var(--shadow);
+      transition:.22s ease;
+      cursor:pointer;
+    }
+    .btn:hover, button:hover{transform:translateY(-1px); border-color:rgba(212,184,146,.45)}
+    .btn.primary{
+      background:linear-gradient(180deg, rgba(212,184,146,.28), rgba(157,127,88,.18));
+      border-color:rgba(212,184,146,.42);
+      color:#fff8ef;
+    }
+    .btn.ghost{
+      background:transparent;
+      box-shadow:none;
+    }
+
+    .hero{
+      position:relative;
+      padding:86px 0 58px;
+      overflow:hidden;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:28px;
+      align-items:stretch;
+    }
+    .hero-copy, .hero-card{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+      border-radius:30px;
+      box-shadow:var(--shadow);
+    }
+    .hero-copy{padding:40px 34px 34px}
+    .eyebrow{
+      color:var(--muted); text-transform:uppercase; font-size:12px; letter-spacing:.22em; margin-bottom:18px;
+    }
+    .hero h2{
+      margin:0;
+      font-size:clamp(40px, 6vw, 82px);
+      line-height:.96;
+      font-weight:normal;
+      max-width:10ch;
+    }
+    .hero h2 .soft{color:#dcc8ab}
+    .hero-lead{
+      margin:22px 0 0;
+      font-size:18px; color:#e0d5c8; max-width:34em;
+    }
+    .hero-points{
+      display:flex; gap:10px; flex-wrap:wrap; margin:24px 0 0;
+    }
+    .chip{
+      padding:10px 14px; border-radius:999px; border:1px solid rgba(255,255,255,.1);
+      background:rgba(255,255,255,.04); color:#ede0cf; font-size:12px; letter-spacing:.1em; text-transform:uppercase;
+    }
+    .hero-actions{display:flex; gap:12px; flex-wrap:wrap; margin-top:28px}
+
+    .hero-card{padding:22px; position:relative; min-height:100%}
+    .visual{
+      position:relative; border-radius:24px; overflow:hidden; min-height:520px;
+      background:
+       radial-gradient(circle at 20% 18%, rgba(240,220,190,.18), transparent 20%),
+       radial-gradient(circle at 65% 24%, rgba(212,184,146,.18), transparent 18%),
+       linear-gradient(140deg, #18181c 0%, #0f0f12 30%, #191816 70%, #0c0c0e 100%);
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.02);
+    }
+    .visual::before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(ellipse at 60% 50%, rgba(240,220,190,.18), transparent 22%),
+        radial-gradient(ellipse at 54% 58%, rgba(212,184,146,.12), transparent 20%),
+        radial-gradient(ellipse at 48% 76%, rgba(157,127,88,.12), transparent 18%),
+        linear-gradient(180deg, transparent 0%, rgba(0,0,0,.22) 100%);
+      opacity:.95;
+    }
+    .visual::after{
+      content:"";
+      position:absolute;
+      inset:8% 14% 10% 14%;
+      border-radius:26px;
+      border:1px solid rgba(255,255,255,.08);
+      background:
+        radial-gradient(circle at 50% 14%, rgba(255,255,255,.12), transparent 16%),
+        linear-gradient(180deg, rgba(255,255,255,.05), transparent 35%),
+        linear-gradient(160deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
+      box-shadow:
+        inset 0 0 80px rgba(255,255,255,.03),
+        0 40px 120px rgba(0,0,0,.45);
+      transform:skewY(-3deg);
+      opacity:.9;
+    }
+    .floating{
+      position:absolute; z-index:3;
+      right:18px; bottom:18px; left:18px;
+      display:grid; grid-template-columns:1fr 1fr; gap:12px;
+    }
+    .mini{
+      padding:16px; border-radius:18px; border:1px solid rgba(255,255,255,.1);
+      background:rgba(8,8,10,.58); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+    }
+    .mini strong{
+      display:block; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); font-weight:normal;
+    }
+    .mini span{display:block; margin-top:8px; font-size:19px}
+
+    section{padding:28px 0}
+    .section-title{
+      margin:0 0 10px; font-size:clamp(28px, 3vw, 48px); font-weight:normal; line-height:1.04;
+    }
+    .section-kicker{
+      color:var(--muted); text-transform:uppercase; letter-spacing:.18em; font-size:12px; margin-bottom:12px;
+    }
+    .section-lead{
+      color:#ddcfbd; font-size:18px; max-width:44em; margin:0;
+    }
+
+    .band{
+      padding:18px 0 0;
+    }
+    .note{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.03));
+      border-radius:22px; padding:22px;
+      display:flex; flex-wrap:wrap; gap:18px; justify-content:space-between; align-items:center;
+    }
+    .note p{margin:0; color:#eadcc8}
+    .note .small{color:var(--soft); font-size:13px; text-transform:uppercase; letter-spacing:.16em}
+
+    .cards{
+      display:grid; grid-template-columns:repeat(3, 1fr); gap:18px; margin-top:22px;
+    }
+    .card{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+      border-radius:26px; padding:26px;
+      box-shadow:var(--shadow);
+      min-height:100%;
+    }
+    .card .num{
+      font-size:12px; color:var(--muted); letter-spacing:.18em; text-transform:uppercase; margin-bottom:12px;
+    }
+    .card h3{
+      margin:0 0 10px; font-size:28px; font-weight:normal; line-height:1.03;
+    }
+    .card p{margin:0 0 14px; color:#e2d5c4}
+    .list{padding:0; margin:18px 0 0; list-style:none}
+    .list li{
+      padding:10px 0; border-top:1px solid rgba(255,255,255,.08); color:#f0e7db;
+    }
+    .price{
+      display:inline-block; margin-top:12px;
+      padding:10px 14px; border-radius:999px; border:1px solid rgba(212,184,146,.28);
+      background:rgba(212,184,146,.08); color:#fff6ea; letter-spacing:.08em; text-transform:uppercase; font-size:12px;
+    }
+
+    .two-col{
+      display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:22px;
+    }
+
+    .grid-availability{
+      display:grid; grid-template-columns:1.05fr .95fr; gap:18px; margin-top:22px;
+    }
+    .times{
+      display:grid; grid-template-columns:repeat(2, 1fr); gap:14px; margin-top:18px;
+    }
+    .time{
+      padding:18px; border:1px solid rgba(255,255,255,.08); border-radius:20px; background:rgba(255,255,255,.035);
+    }
+    .time .label{font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted)}
+    .time .slot{font-size:28px; margin-top:8px}
+
+    .steps{
+      display:grid; gap:12px; margin-top:18px;
+    }
+    .step{
+      display:grid; grid-template-columns:56px 1fr; gap:14px;
+      padding:16px; border-radius:20px; background:rgba(255,255,255,.035); border:1px solid rgba(255,255,255,.08);
+    }
+    .step .circle{
+      width:56px; height:56px; border-radius:50%;
+      border:1px solid rgba(255,255,255,.12);
+      display:grid; place-items:center; color:#fff3e1; font-size:18px;
+      background:linear-gradient(180deg, rgba(212,184,146,.18), rgba(255,255,255,.04));
+    }
+    .step h4{margin:2px 0 6px; font-size:20px; font-weight:normal}
+    .step p{margin:0; color:#dfd0bf}
+
+    .contact-panel{
+      margin-top:22px;
+      display:grid; grid-template-columns:1fr 1fr; gap:18px;
+    }
+    .contact-card{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+      border-radius:26px; padding:28px;
+      box-shadow:var(--shadow);
+    }
+    .contact-card h3{margin:0 0 10px; font-size:30px; font-weight:normal}
+    .contact-card p{margin:0 0 18px; color:#e2d4c3}
+    .contact-stack{display:flex; flex-wrap:wrap; gap:12px}
+    .subtle{
+      color:var(--soft); font-size:13px;
+    }
+    .footer{
+      padding:20px 0 44px; color:#b8a99a;
+    }
+    .footer .wrap{
+      border-top:1px solid rgba(255,255,255,.08);
+      padding-top:24px;
+      display:flex; gap:16px; justify-content:space-between; flex-wrap:wrap;
+      font-size:13px;
+    }
+
+    @media (max-width: 1080px){
+      .hero-grid, .grid-availability, .contact-panel, .two-col{grid-template-columns:1fr}
+      .cards{grid-template-columns:1fr}
+      .hero h2{max-width:12ch}
+    }
+    @media (max-width: 760px){
+      .nav{padding:10px 0}
+      .nav-links{display:none}
+      .hero{padding-top:40px}
+      .hero-copy{padding:28px 22px}
+      .hero-card{padding:14px}
+      .visual{min-height:420px}
+      .floating{grid-template-columns:1fr}
+      .times{grid-template-columns:1fr}
+      .section-lead, .hero-lead{font-size:16px}
+      .btn{width:100%}
+      .hero-actions{flex-direction:column}
+      .contact-stack{flex-direction:column}
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="wrap nav">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true"></div>
+        <div>
+          <h1>Private Healing Somatics</h1>
+          <p>Discreet · Guided · High-Touch</p>
+        </div>
+      </div>
+
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#experience">Experience</a>
+        <a href="#sessions">Sessions</a>
+        <a href="#availability">Availability</a>
+        <a href="#process">Process</a>
+        <a href="#contact">Request</a>
+      </nav>
+
+      <a class="btn primary" href="sms:+12133525322?body=Hi%20Private%20Healing%20Somatics%2C%20I%E2%80%99d%20like%20to%20request%20a%20private%20session.">Request Session</a>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow">Private somatic bodywork · by request only</div>
+        <h2>A <span class="soft">deeper</span> kind of release for clients who don’t want anything ordinary.</h2>
+        <p class="hero-lead">
+          Private Healing Somatics offers discreet, guided sessions centered on nervous system regulation, immersive touch, sensual reconnection, and controlled release. The experience is slow, intuitive, elevated, and designed for people who value privacy, presence, and quality.
+        </p>
+        <div class="hero-points">
+          <span class="chip">Discreet</span>
+          <span class="chip">Immersive</span>
+          <span class="chip">High-touch care</span>
+          <span class="chip">Private setting</span>
+        </div>
+        <div class="hero-actions">
+          <a class="btn primary" href="sms:+12133525322?body=Hi%20Private%20Healing%20Somatics%2C%20I%E2%80%99d%20like%20to%20request%20a%20private%20session.">Text to Request</a>
+          <a class="btn ghost" href="mailto:privatehealingla@gmail.com?subject=Private%20Session%20Request&body=Hi%2C%20I%E2%80%99d%20like%20to%20request%20a%20private%20session.%0A%0APreferred%20day%3A%0APreferred%20time%3A%0ARequested%20session%3A">Email Request</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="visual" aria-label="Luxury abstract hero visual">
+          <div class="floating">
+            <div class="mini">
+              <strong>Designed For</strong>
+              <span>Professionals, creatives, athletes, and private clients seeking discretion</span>
+            </div>
+            <div class="mini">
+              <strong>Experience</strong>
+              <span>Grounding, sensual, emotionally attuned, and never rushed</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="note">
+        <div>
+          <div class="small">Not a standard massage</div>
+          <p>This work is for clients who want more than surface-level touch. Each session is tailored in real time to help the body soften, open, regulate, and feel again without chaos, pressure, or performance.</p>
+        </div>
+        <a class="btn" href="#sessions">View Sessions</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <div class="section-kicker">Why clients choose this experience</div>
+      <h2 class="section-title">Luxury, presence, and real body intelligence.</h2>
+      <p class="section-lead">
+        The difference is not just technique. It is pacing, energy, discretion, emotional attunement, and the ability to create a space where the body can drop out of stress and into sensation. This is refined bodywork for clients who value trust, depth, and a highly intentional experience.
+      </p>
+
+      <div class="cards">
+        <article class="card">
+          <div class="num">01 · Nervous System Focused</div>
+          <h3>More than relaxation</h3>
+          <p>Sessions are built to calm internal noise, soften stored tension, and create a deeper sense of safety inside the body.</p>
+          <ul class="list">
+            <li>Deep decompression</li>
+            <li>Grounding touch and pacing</li>
+            <li>Emotional and physical release</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="num">02 · Elevated Sensuality</div>
+          <h3>Controlled, not chaotic</h3>
+          <p>The sensual element is immersive and intentional, never rushed or mechanical. The experience is designed to feel curated, responsive, and high touch.</p>
+          <ul class="list">
+            <li>Presence over performance</li>
+            <li>Attuned, intuitive flow</li>
+            <li>Luxury without excess</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="num">03 · Discretion First</div>
+          <h3>Private by design</h3>
+          <p>Privacy, respect, and clear boundaries are part of the experience from beginning to end. The environment is calm, selective, and confidential.</p>
+          <ul class="list">
+            <li>By-request availability</li>
+            <li>Limited scheduling</li>
+            <li>Quiet, direct communication</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="sessions">
+    <div class="wrap">
+      <div class="section-kicker">Signature sessions</div>
+      <h2 class="section-title">Curated experiences, not a cluttered menu.</h2>
+      <p class="section-lead">Choose the pace and depth that fits what your body actually needs. Longer sessions are strongly recommended for the fullest experience.</p>
+
+      <div class="cards">
+        <article class="card">
+          <div class="num">Signature Foundation</div>
+          <h3>Sensual Reset</h3>
+          <p>A slow, grounding session that blends somatic bodywork, intuitive touch, and nervous system regulation to help the body soften and return to itself.</p>
+          <ul class="list">
+            <li>Grounding, recalibrating pace</li>
+            <li>Ideal entry point for new clients</li>
+            <li>Designed to release tension without overwhelm</li>
+          </ul>
+          <span class="price">60 min · $250</span>
+        </article>
+
+        <article class="card">
+          <div class="num">Signature Premium</div>
+          <h3>Edge &amp; Flow</h3>
+          <p>A continuous, guided build of sensation and restraint designed to heighten the body, deepen focus, and create a more immersive release.</p>
+          <ul class="list">
+            <li>Advanced sensual pacing</li>
+            <li>Control, anticipation, and attunement</li>
+            <li>For clients who want depth and intensity</li>
+          </ul>
+          <span class="price">90 min · $350</span>
+        </article>
+
+        <article class="card">
+          <div class="num">VIP Extended</div>
+          <h3>Immersive Private Session</h3>
+          <p>A slower, longer-form experience for full-body decompression, deeper emotional and physical release, and a more complete sensory reset.</p>
+          <ul class="list">
+            <li>Unhurried pacing</li>
+            <li>Full immersive arc</li>
+            <li>Best for clients seeking the deepest reset</li>
+          </ul>
+          <span class="price">120 min · $550</span>
+        </article>
+      </div>
+
+      <div class="two-col">
+        <article class="card">
+          <div class="num">Short format option</div>
+          <h3>Private Intro Session</h3>
+          <p>For returning local clients or those seeking a shorter reset.</p>
+          <span class="price">45 min · $180</span>
+        </article>
+        <article class="card">
+          <div class="num">Ongoing care</div>
+          <h3>Priority Client Access</h3>
+          <p>Private clients may request recurring sessions or priority scheduling when availability allows.</p>
+          <span class="price">By approval</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="availability">
+    <div class="wrap">
+      <div class="section-kicker">Today’s private availability</div>
+      <h2 class="section-title">Simple, direct, and easy to update.</h2>
+      <p class="section-lead">Limited sessions are available each day. To edit these times later, open this file and update the visible slot text only.</p>
+
+      <div class="grid-availability">
+        <article class="card">
+          <div class="num">Available now</div>
+          <div class="times">
+            <div class="time">
+              <div class="label">Opening one</div>
+              <div class="slot">2:00 PM</div>
+            </div>
+            <div class="time">
+              <div class="label">Opening two</div>
+              <div class="slot">5:30 PM</div>
+            </div>
+            <div class="time">
+              <div class="label">Opening three</div>
+              <div class="slot">8:00 PM</div>
+            </div>
+            <div class="time">
+              <div class="label">Location</div>
+              <div class="slot" style="font-size:20px">Private DTLA incall</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="num">Request directly</div>
+          <h3>Fastest way to secure a time</h3>
+          <p>Text with your preferred slot, requested session, and whether you are new or returning.</p>
+          <div class="contact-stack">
+            <a class="btn primary" href="sms:+12133525322?body=Hi%20Private%20Healing%20Somatics%2C%20I%E2%80%99d%20like%20to%20request%20a%20session.%0A%0APreferred%20time%3A%0ARequested%20session%3A%0ANew%20or%20returning%20client%3A">Text 213-352-5322</a>
+            <a class="btn" href="mailto:privatehealingla@gmail.com?subject=Private%20Session%20Request&body=Hi%2C%20I%E2%80%99d%20like%20to%20request%20a%20session.%0A%0APreferred%20time%3A%0ARequested%20session%3A%0ANew%20or%20returning%20client%3A">Email request</a>
+          </div>
+          <p class="subtle" style="margin-top:16px">Please include your preferred time, requested session, and any brief context relevant to your visit.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="process">
+    <div class="wrap">
+      <div class="section-kicker">How booking works</div>
+      <h2 class="section-title">Clear, private, and streamlined.</h2>
+      <p class="section-lead">The process is designed to keep communication simple while protecting the quality and privacy of the experience.</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="circle">1</div>
+          <div>
+            <h4>Request your preferred time</h4>
+            <p>Text or email with your desired slot, requested session, and whether you are new or returning.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="circle">2</div>
+          <div>
+            <h4>Receive confirmation</h4>
+            <p>Approved requests receive a response with confirmation details and any next-step instructions needed to secure the booking.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="circle">3</div>
+          <div>
+            <h4>Arrive and decompress</h4>
+            <p>Your session begins in a calm, discreet environment designed for focus, release, and full presence.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <article class="card">
+          <div class="num">Client fit</div>
+          <h3>Who this is for</h3>
+          <p>Clients who value discretion, emotional intelligence, high-touch care, and a refined experience over something generic or transactional.</p>
+        </article>
+        <article class="card">
+          <div class="num">Environment</div>
+          <h3>Privacy and respect</h3>
+          <p>Sessions are conducted in a selective, private setting with calm communication, intentional pacing, and clear mutual respect.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="section-kicker">Request a private session</div>
+      <h2 class="section-title">Everything linked. Everything embedded. Ready to deploy.</h2>
+      <p class="section-lead">This version is self-contained in one file, with no external images, stylesheets, or scripts required.</p>
+
+      <div class="contact-panel">
+        <article class="contact-card">
+          <h3>Text request</h3>
+          <p>The fastest route for direct scheduling.</p>
+          <div class="contact-stack">
+            <a class="btn primary" href="sms:+12133525322?body=Hi%20Private%20Healing%20Somatics%2C%20I%E2%80%99d%20like%20to%20request%20a%20private%20session.%0A%0AName%20or%20alias%3A%0APreferred%20time%3A%0ARequested%20session%3A%0ANew%20or%20returning%20client%3A">Open text message</a>
+          </div>
+          <p class="subtle" style="margin-top:14px">213-352-5322</p>
+        </article>
+
+        <article class="contact-card">
+          <h3>Email request</h3>
+          <p>Ideal for advance inquiries or more detailed requests.</p>
+          <div class="contact-stack">
+            <a class="btn" href="mailto:privatehealingla@gmail.com?subject=Private%20Session%20Request&body=Hi%2C%20I%E2%80%99d%20like%20to%20request%20a%20private%20session.%0A%0AName%20or%20alias%3A%0APreferred%20time%3A%0ARequested%20session%3A%0ANew%20or%20returning%20client%3A">Open email draft</a>
+          </div>
+          <p class="subtle" style="margin-top:14px">privatehealingla@gmail.com</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div>Private Healing Somatics</div>
+      <div>Discreet private sessions · DTLA · By request only</div>
+    </div>
+  </footer>
+</body>
+</html>
